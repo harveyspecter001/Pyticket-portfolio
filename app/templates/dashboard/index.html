@@ -1,0 +1,161 @@
+{%extends "base.html" %}
+{% load account %}
+{% load static %}
+{% block title%} Index {% endblock %}
+{% block content%}
+<style>
+  .g-4,
+  .gy-4 {
+    --bs-gutter-y: 1.5rem;
+    padding-bottom: inherit;
+  }
+
+
+  .fw-bold {
+    font-weight: 700 !important;
+    text-align: center;
+  }
+</style>
+
+
+<div class="row">
+  <div class="col-12">
+    <div class="card mb-4">
+      <div class="user-profile-header-banner">
+        <img src="https://cdn1.epicgames.com/salesEvent/salesEvent/egs-discord-discord-s1-2560x1440-51474ee7abe3_2560x1440-e14a2b58e93768f0abc47dbf62a4ee86" alt="Banner image" class="rounded-top">
+      </div>
+      <div class="user-profile-header d-flex flex-column flex-sm-row text-sm-start text-center mb-4">
+        <div class="flex-shrink-0 mt-n2 mx-sm-0 mx-auto">
+          <img src="{{ avatar_url }}" alt="user image" class="d-block h-auto ms-0 ms-sm-4 rounded user-profile-img">
+        </div>
+        <div class="flex-grow-1 mt-3 mt-sm-5">
+          <div class="d-flex align-items-md-end align-items-sm-start align-items-center justify-content-md-between justify-content-start mx-4 flex-md-row flex-column gap-4">
+            <div class="user-profile-info">
+              <h4>{% user_display user %}</h4>
+              <!-- <ul class="list-inline mb-0 d-flex align-items-center flex-wrap justify-content-sm-start justify-content-center gap-2">
+                <li class="list-inline-item">
+                  <i class="mdi mdi-invert-colors me-1 mdi-20px"></i><span class="fw-semibold">UX Designer</span>
+                </li>
+                <li class="list-inline-item">
+                  <i class="mdi mdi-map-marker-outline me-1 mdi-20px"></i> <span class="fw-semibold">Vatican City</span>
+                </li>
+                <li class="list-inline-item">
+                  <i class="mdi mdi-calendar-blank-outline me-1 mdi-20px"></i> <span class="fw-semibold"> Joined April 2021</span></li>
+              </ul> -->
+            </div>
+            <a href="javascript:void(0)" class="btn btn-primary waves-effect waves-light">
+              <i class="mdi mdi-account-check-outline me-1"></i>Connected
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<h4 class="fw-bold py-3 mb-4">
+  Servers With Ticketpro
+</h4>
+<div class="row g-4">
+  {% for guild in guilds_with_bot %}
+  <div class="col-xl-4 col-lg-6 col-md-6">
+    <div class="card">
+      <div class="card-body text-center">
+        <!-- <div class="dropdown btn-pinned">
+          <button type="button" class="btn dropdown-toggle hide-arrow p-0" data-bs-toggle="dropdown"
+            aria-expanded="false"><i class="mdi mdi-dots-vertical mdi-24px text-muted"></i></button>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="javascript:void(0);">Share connection</a></li>
+            <li><a class="dropdown-item" href="javascript:void(0);">Block connection</a></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item text-danger" href="javascript:void(0);">Delete</a></li>
+          </ul>
+        </div> -->
+        <div class="mx-auto mb-4">
+          <img src="https://cdn.discordapp.com/icons/{{ guild.id }}/{{ guild.icon }}.png" alt="{{ guild.name }}"
+            alt="Avatar Image" class="rounded-circle w-px-100" />
+        </div>
+        <h5 class="mb-1 card-title">{{ guild.name }}</h5>
+        <span class="text-muted">{{ guild.owner }}</span>
+<!--         <div class="d-flex align-items-center justify-content-center my-4 gap-2">
+          <a href="javascript:;" class="me-1"><span class="badge bg-label-secondary rounded-pill">Figma</span></a>
+          <a href="javascript:;"><span class="badge bg-label-warning rounded-pill">Sketch</span></a>
+        </div> -->
+
+        <div class="d-flex align-items-center justify-content-around mb-4">
+          <div>
+            <h4 class="mb-1">{{ guild.member_count }}</h4>
+            <span class="text-muted">Members</span>
+          </div>
+          <!-- Eliminar las secciones de Projects, Tasks y Connections -->
+        </div>
+        <div class="d-flex align-items-center justify-content-center">
+          <a href="#" class="btn btn-primary d-flex align-items-center me-3"><i
+              class="mdi mdi-account-check-outline me-1 "></i>Connected</a>
+          <a href="{% url 'configure_bot' guild.id %}" class="btn btn-outline-secondary btn-icon"><i
+              class="mdi mdi-cog-outline"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% endfor %}
+</div>
+
+
+
+
+<h4 class="fw-bold py-3 mb-4">
+  Servers Without Ticketpro
+</h4>
+
+
+
+
+
+
+
+
+<div class="row g-4">
+
+  {% for guild in guilds_without_bot %}
+  <div class="col-xl-4 col-lg-6 col-md-6">
+    <div class="card">
+      <div class="card-body text-center">
+        <!-- <div class="dropdown btn-pinned">
+          <button type="button" class="btn dropdown-toggle hide-arrow p-0" data-bs-toggle="dropdown"
+            aria-expanded="false"><i class="mdi mdi-dots-vertical mdi-24px text-muted"></i></button>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="javascript:void(0);">Share connection</a></li>
+            <li><a class="dropdown-item" href="javascript:void(0);">Block connection</a></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item text-danger" href="javascript:void(0);">Delete</a></li>
+          </ul>
+        </div> -->
+        <div class="mx-auto mb-4">
+          <img src="https://cdn.discordapp.com/icons/{{ guild.id }}/{{ guild.icon }}.png" alt="{{ guild.name }}"
+            alt="Avatar Image" class="rounded-circle w-px-100" />
+        </div>
+        <h5 class="mb-1 card-title">{{ guild.name }}</h5>
+        <span class="text-muted">UI Designer</span>
+<!--         <div class="d-flex align-items-center justify-content-center my-4 gap-2">
+          <a href="javascript:;" class="me-1"><span class="badge bg-label-secondary rounded-pill">Figma</span></a>
+          <a href="javascript:;"><span class="badge bg-label-warning rounded-pill">Sketch</span></a>
+        </div> -->
+
+
+        <div class="d-flex align-items-center justify-content-center">
+          <a href="{{ guild.invite_link }}" class="btn btn-primary d-flex align-items-center me-3"><i
+              class="mdi mdi-account-check-outline me-1 "></i>Connect</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  {% endfor %}
+</div>
+
+{% endblock %}

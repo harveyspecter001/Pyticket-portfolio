@@ -1,0 +1,105 @@
+{%extends "base.html" %}
+{% load account %}
+
+{% block content%}
+
+
+
+
+<!-- 
+<div class="card-header d-flex justify-content-between align-items-center">
+    <h4 class="mb-4 h5">Message Ticket Information</h4>
+
+    <small class="text-muted float-end">Merged input group</small>
+  </div> -->
+
+
+<div class="row">
+
+    <div class="col-xl">
+        <div class="card mb-4">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h4 class="mb-4 h5">Message Ticket Information</h4>
+                <small class="text-muted float-end">Merged input group</small>
+
+            </div>
+            <div class="card-body">
+                <form enctype="multipart/form-data" method="post">
+                    {% csrf_token %}
+                    {% if form.errors %}
+                    <div class="alert alert-danger alert-dismissible" role="alert">
+                        <div id="form_errors">
+                            {% for key, value in form.errors.items %}
+                            <strong>{{ value }}</strong>
+                            {% endfor %}
+                        </div>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {% endif %}
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h6 class="mb-4 ">1. Preview Message</h6>
+                        <small class="text-muted float-end">Title for card created in new ticket text channel-say
+                            something like "Created By : "</small>
+                    </div>
+                    <div class="input-group input-group-merge mb-4">
+                        <span id="basic-icon-default-fullname2" class="input-group-text"><i
+                                class="mdi mdi-account-outline"></i></span>
+                        <div class="form-floating form-floating-outline">
+                            <label for="id_creation_message"></label>
+                            {{ form.creation_message }}
+
+                        </div>
+                    </div>
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h6 class="mb-4 ">2. Welcome Message</h6>
+                        <small class="text-muted float-end">Welcome Message for user in the created ticket text channel
+                            -put something like "Hello 🖐: "</small>
+                    </div>
+                    <div class="input-group input-group-merge mb-4">
+                        <span id="basic-icon-default-company2" class="input-group-text"><i
+                                class="mdi mdi-office-building-outline"></i></span>
+                        <div class="form-floating form-floating-outline">
+                            <label for="basic-icon-default-company"></label>
+                            {{ form.welcome_message }}
+                        </div>
+                    </div>
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h6 class="mb-4 ">3. Title Message</h6>
+                        <small class="text-muted float-end">Specify Subject "Subject  : "</small>
+                    </div>
+                    <div class="mb-4">
+                        <div class="input-group input-group-merge">
+                            <span class="input-group-text"><i class="mdi mdi-email-outline"></i></span>
+                            <div class="form-floating form-floating-outline">
+                                <label for="basic-icon-default-email"></label>
+                                {{ form.ticket_title }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h6 class="mb-4 ">4. Description Message</h6>
+                        <small class="text-muted float-end">Description for the card created.</small>
+                    </div>
+                    <div class="input-group input-group-merge mb-4">
+                        <span id="basic-icon-default-phone2" class="input-group-text"><i
+                                class="mdi mdi-phone"></i></span>
+                        <div class="form-floating form-floating-outline">
+                            <label for="basic-icon-default-phone"></label>
+                            {{ form.ticket_description }}
+
+                        </div>
+                    </div>
+                    
+                
+                    <button type="submit" class="btn btn-primary waves-effect waves-light">Send</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}
